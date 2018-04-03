@@ -24,17 +24,17 @@
     function success(data) {
         var divNews = $('#news');
         divNews.empty();
-        setTopNews( data.articles[0]);
+        setTopNews(data.articles[0]);
         for (var i = 1; i < data.articles.length; ++i) {
             divNews.append(getNewsHtml(data.articles[i]));
         }
     }
 
     function setTopNews(article) {
-        if(article) {
+        if (article) {
             $('#top-news-title').text(article.title);
             $('#top-news-description').text(article.description);
-            $('#top-news-image').attr('src', article.urlToImage).attr('alt', article.title);
+            $('#top-news-image').attr('src', !article.urlToImage ? 'img/default.jpg' : article.urlToImage).attr('alt', article.title);
             $('#top-news-link').attr('href', article.url);
         }
     }
@@ -94,30 +94,35 @@
 
     function getNewsHtml(article) {
 
-        var card = $('<div>').addClass('card col-12 col-sm-2 col-md-3 col-xl-3');
+        var card = $('<div>').addClass('card col-12 col-sm-6');
 
-        card = addImage(card);
-        card = addBodyTitle(card);
-        card = addBodyActions(card);
+        var cardContainer = $('<div>').addClass('row');
+        card.append(cardContainer);
+
+        cardContainer = addImage(cardContainer);
+        cardContainer = addBodyTitle(cardContainer);
+        cardContainer = addBodyActions(cardContainer);
 
         return card;
 
         function addImage(card) {
-            if (article.urlToImage) {
-                return card.append(
+            var col = $('<div>')
+                .addClass('col-12 col-xl-6')
+                .append(
                     $('<img>')
-                        .attr('src', article.urlToImage)
+                        .attr('src', article.urlToImage?article.urlToImage:'img/default.jpg')
                         .attr('alt', article.title)
                         .addClass('card-img-top')
                 );
-            }
-            return card;
+            return card.append(
+                col
+            );
         }
 
         function addBodyTitle(card) {
             return card.append(
                 $('<div>')
-                    .addClass('card-body')
+                    .addClass('card-body col-12 col-xl-6')
                     .append($('<h5>').addClass('card-title').append(article.title))
                     .append($('<h6>').addClass('card-subtitle mb-2 text-muted')
                         .append(moment(article.publishedAt).fromNow()))
