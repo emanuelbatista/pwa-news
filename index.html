@@ -7,14 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    <meta name="Description" content="Author: , 
+        Illustrator: P. Picture, Category: Books, Price: $17.99, 
+        Length: 784 pages">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="all">
+    <link rel="preload" href="css/open-iconic-bootstrap.min.css" media="all" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="css/main.css" media="all" as="style" onload="this.rel='stylesheet'">
     <link rel="manifest" href="manifest.json"/>
     <title>PWA NEWS</title>
 </head>
@@ -77,11 +79,11 @@
                         <h4 id="top-news-title" class="font-italic"></h4>
                         <p id="top-news-description" class="lead my-3"></p>
                         <p class="lead mb-0">
-                            <a href="#" target="_blank" id="top-news-link" class="text-white font-weight-bold">Continue reading...</a>
+                            <a href="#" target="_blank" rel="noopener" id="top-news-link" class="text-white font-weight-bold">Continue reading...</a>
                         </p>
                     </div>
                     <div class="col-12 col-md-6 order-1 order-md-2">
-                        <img id="top-news-image" class="img-fluid" src="img/default.jpg" />
+                        <img id="top-news-image" class="img-fluid lazy" data-src="img/default.jpg" />
                     </div>
                 </div>
             </div>
@@ -96,12 +98,10 @@
     </footer>
 
     <script src="library/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="library/moment.min.js"></script>
-    <script src="js/api.js"></script>
+    <script src="library/pooper.min.js" async></script>
+    <script src="library/bootstrap.min.js" async></script>
+    <script src="library/moment.min.js" async></script>
+    <script src="js/api.js" async></script>
     <script src="js/add-home-event.js"></script>
     <script src="js/sw-install.js" async></script>
 

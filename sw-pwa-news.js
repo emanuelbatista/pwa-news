@@ -1,12 +1,14 @@
 (function () {
     'use strict';
     var API = 'https://newsapi.org/v2/';
-    var SHELL_CACHE = "pwa-new-shell-cache-v3";
-    var DATA_CACHE = "pwa-new-data-cache-v3";
+    var SHELL_CACHE = "pwa-new-shell-cache-v1";
+    var DATA_CACHE = "pwa-new-data-cache-v1";
     var SHELL_FILTER_TO_CACHE = [
         "/",
         "manifest.json",
         "/css/main.css",
+        "/css/bootstrap.min.css",
+        "/css/open-iconic-bootstrap.min.css",
         "/img/default.jpg",
         "/img/android-chrome-192x192.png",
         "/img/android-chrome-512x512.png",
@@ -15,6 +17,8 @@
         "favicon.ico",
         "/js/api.js",
         "/js/add-home-event.js",
+        "/library/bootstrap.min.js",
+        "/library/pooper.min.js",
         "/library/jquery-3.3.1.min.js",
         "/library/moment.min.js"
     ];

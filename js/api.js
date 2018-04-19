@@ -8,8 +8,10 @@
     var ENDPOINT_HEADLINES = 'top-headlines?';
     var ENDPOINT_EVERYTHING = 'everything?';
     var API_KEY = 'apiKey=c5a59e6e745f45849e2e56af4efad07d';
-
-    getNews();
+    
+    window.addEventListener("load", function () {
+        getNews();
+    });
 
     function getNews() {
         var url = API + ENDPOINT_HEADLINES + 'country=br&' + API_KEY + getCategory();
@@ -28,13 +30,14 @@
         for (var i = 1; i < data.articles.length; ++i) {
             divNews.append(getNewsHtml(data.articles[i]));
         }
+        loadLazyImage();
     }
 
     function setTopNews(article) {
         if (article) {
             $('#top-news-title').text(article.title);
             $('#top-news-description').text(article.description);
-            $('#top-news-image').attr('src', !article.urlToImage ? 'img/default.jpg' : article.urlToImage).attr('alt', article.title);
+            $('#top-news-image').attr('src', 'img/default.jpg').attr('data-src', !article.urlToImage ? 'img/default.jpg' : article.urlToImage).attr('alt', article.title).addClass("lazy");
             $('#top-news-link').attr('href', article.url);
         }
     }
@@ -110,9 +113,10 @@
                 .addClass('col-12 col-xl-6')
                 .append(
                     $('<img>')
-                        .attr('src', article.urlToImage?article.urlToImage:'img/default.jpg')
+                        .attr('src','img/default.jpg')
+                        .attr('data-src', !article.urlToImage ? 'img/default.jpg' : article.urlToImage)
                         .attr('alt', article.title)
-                        .addClass('card-img-top')
+                        .addClass('card-img-top lazy')
                 );
             return card.append(
                 col
@@ -140,6 +144,30 @@
                     })
             );
         }
+    }
+
+    function loadLazyImage() {
+        var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+            lazyImages.forEach(function(entry){
+                lazyImageObserver.observe(entry);
+            })
+        } else {
+            // Possibly fall back to a more compatible method here
+        }
+    
+        
     }
 
 })();

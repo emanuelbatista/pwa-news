@@ -82,3 +82,7 @@ window.addEventListener('offline', function(){
   networkElement.classList.add('oi-minus');
 });
 
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+});

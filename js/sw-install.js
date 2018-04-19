@@ -19,7 +19,9 @@
         if (!("Notification" in window)) {
           alert("This browser does not support desktop notification");
         }  else {
-          Notification.requestPermission();
+          if(Notification.permission === "default"){
+            Notification.requestPermission();
+          }
         }
       }
 
